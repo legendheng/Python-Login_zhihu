@@ -26,6 +26,7 @@ def get_xsrf():
 
 #获取登录验证的图片，根据最下面给出的坐标参考，若需要提交多个坐标则以空格来隔开
 def get_captcha():
+     points=[[17.29688,24],[40.2969,25],[66.2969,24],[89.2969,24],[114.297,25],[138.297,26],[162.297,24]]
      import time
      t=str(int(time.time()*1000))
      captcha_url="https://www.zhihu.com/captcha.gif?r={0}&type=login&lang=cn".format(t)#构造验证码网页地址
@@ -41,17 +42,18 @@ def get_captcha():
      except:
          pass
 
-     captcha=input("输入验证码：")
-     final=captcha.split()              #这里用了很别扭的方法构造验证码列表，最终是[[a],[b]]这种形式，硬拼起来
-     x=len(final)
-     s=''
-     for i in range(1,x+1):
-        a=final.pop()
-        if s=='':
-            s=s+'['+a+']'
+     captcha=input("输入倒立文字的位置(1-7),多位时空格隔开：")
+     final=captcha.split()                  #把输入的字符串转成列表
+
+     whole=''
+     for i in final:
+        point=str(points[int(i)-1])         #根据传进来的1-7转换对应的坐标
+        if whole=='':
+            whole=point
         else:
-            s=s+',['+a+']'
-     yanzhengma='{"img_size":[200,44],"input_points":['+str(s)+']}'
+            whole=whole+','+point           #坐标拼接
+
+     yanzhengma='{"img_size":[200,44],"input_points":['+whole+']}'
      return yanzhengma
 
 
@@ -67,9 +69,9 @@ def zhihu_login(account,password):
         if re.match('1\d{10}',account):
             print('手机号码登陆')
             post_url='https://www.zhihu.com/login/phone_num'
-            captcha=get_captcha()
+            captcha=get_captcha()           #获取验证码
             post_data={
-                "_xsrf":get_xsrf(),
+                "_xsrf":get_xsrf(),         #获取_xsrf参数
                 "phone_num":account,
                 "password":password,
                 "captcha_type":"cn",
