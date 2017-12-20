@@ -7,7 +7,7 @@
 * 伪装浏览器访问
 ### 一、确定请求地址、参数（以手机号码形式登录为例子）
 * 推荐使用谷歌浏览器
-![登录首页](https://github.com/legendheng/Python-Login_zhihu/blob/master/index.png)
+![登录首页](https://github.com/legendheng/Python-Login_zhihu/blob/master/zhihu.png)
 * 打开F12开发人员，选择Network(可以看到所有的网页请求)
 ![查看请求信息](https://github.com/legendheng/Python-Login_zhihu/blob/master/getinfo.png)
 * 然后随便填写手机号码和密码，即可看到有一个phone_num请求，点击查看可以发现需要请求的地址(Request URL)、需要提交的参数(Form Data)【注意这里的_xsrf时一串随机数，可以在请求之前用正则获取到，captcha是验证码(可以构造坐标列表得到)】
