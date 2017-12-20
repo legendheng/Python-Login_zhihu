@@ -22,3 +22,5 @@
 * Referer（同上），告诉服务器我是从哪个页面链接过来的
 ### 四、使用http.cookiejar库保存cookies
 * 作用是把cookies保存到本地文件cookies.txt，下次再访问时不需要再请求登陆页面和识别验证码
+### 五、模拟登陆成功
+![登录首页](https://github.com/legendheng/Python-Login_zhihu/blob/master/result.png)
